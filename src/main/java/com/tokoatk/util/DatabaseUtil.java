@@ -15,8 +15,7 @@ public class DatabaseUtil {
     // Blok 'static' ini akan berjalan otomatis SATU KALI
     // saat aplikasi pertama kali mencoba menggunakan kelas ini.
     static {
-        try (InputStream input = DatabaseUtil.class
-        .getResourceAsStream("/db.properties")) {
+        try (InputStream input = DatabaseUtil.class.getResourceAsStream("/com/tokoatk/db.properties")) {
             
             if (input == null) {
                 // Ini adalah error fatal jika file db.properties tidak ada
