@@ -1,6 +1,6 @@
 /*
  * ========================================
- * == File style.css (v8.0 - Tema Modern Minimalist) ==
+ * == File style.css (v8.1 - Perbaikan StackOverflow) ==
  * ========================================
  */
 
@@ -10,7 +10,11 @@
     -fx-danger: #D9534F;
     -fx-base-bg: #F4F7F9; /* Latar belakang abu-abu muda */
     -fx-card-bg: #FFFFFF; /* Latar belakang kartu putih */
-    -fx-border-color: #DDE2E7; /* Border abu-abu muda untuk input */
+    
+    /* === INI PERBAIKANNYA === */
+    /* Nama variabel diubah agar tidak bentrok dengan nama properti CSS */
+    -fx-input-border-color: #DDE2E7; /* Border abu-abu muda untuk input */
+    
     -fx-text-primary: #212121;
     -fx-text-secondary: #666666;
     
@@ -86,7 +90,10 @@
     -fx-background-color: -fx-card-bg;
     -fx-background-radius: 6px;
     -fx-border-radius: 6px;
-    -fx-border-color: -fx-border-color; /* Border abu-abu muda */
+    
+    /* === INI PERBAIKANNYA === */
+    -fx-border-color: -fx-input-border-color; /* Menggunakan variabel baru */
+    
     -fx-border-width: 1px;
 }
 .text-field:focused, .text-area:focused, .combo-box:focused {
@@ -98,7 +105,10 @@
 /* --- Tabel --- */
 .table-view {
     -fx-background-color: -fx-card-bg;
-    -fx-border-color: -fx-border-color;
+    
+    /* === INI PERBAIKANNYA === */
+    -fx-border-color: -fx-input-border-color; /* Menggunakan variabel baru */
+    
     -fx-border-radius: 6px;
     -fx-background-radius: 6px;
     -fx-border-width: 1px;
@@ -138,7 +148,10 @@
 /* --- Status Bar (Jam) --- */
 .border-pane > .bottom > .hbox {
     -fx-background-color: -fx-card-bg;
-    -fx-border-color: -fx-border-color;
+    
+    /* === INI PERBAIKANNYA === */
+    -fx-border-color: -fx-input-border-color; /* Menggunakan variabel baru */
+    
     -fx-border-width: 1px 0 0 0; /* Garis tipis di atas */
 }
 #labelJam {
