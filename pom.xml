@@ -23,6 +23,7 @@
             <artifactId>javafx-controls</artifactId>
             <version>21.0.2</version> 
         </dependency>
+        
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
@@ -56,6 +57,8 @@
                 <includes>
                     <include>**/*.fxml</include>
                     <include>**/*.css</include>
+                    
+                    <include>**/*.properties</include> 
                     
                     <include>**/*.png</include>
                     <include>**/*.jpg</include>
