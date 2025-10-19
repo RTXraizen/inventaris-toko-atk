@@ -16,7 +16,7 @@ public class DatabaseUtil {
     // saat aplikasi pertama kali mencoba menggunakan kelas ini.
     static {
         try (InputStream input = DatabaseUtil.class
-                .getResourceAsStream("/com/tokoatk/db.properties")) {
+        .getResourceAsStream("/db.properties")) {
             
             if (input == null) {
                 // Ini adalah error fatal jika file db.properties tidak ada

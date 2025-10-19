@@ -1,47 +1,64 @@
 /*
- * ====================================================
- * == File style.css (v7.1 - PERBAIKAN StackOverflowError) ==
- * ====================================================
+ * ========================================
+ * == File style.css (v8.0 - Tema Modern Minimalist) ==
+ * ========================================
  */
 
-/* --- WARNA DASAR --- */
+/* --- Variabel Warna & Font --- */
 .root {
-    -fx-primary: #0078D4; 
+    -fx-primary: #0078D4;
     -fx-danger: #D9534F;
-    -fx-base: #FAFAFA;
-    -fx-control-inner-background: #FFFFFF;
+    -fx-base-bg: #F4F7F9; /* Latar belakang abu-abu muda */
+    -fx-card-bg: #FFFFFF; /* Latar belakang kartu putih */
+    -fx-border-color: #DDE2E7; /* Border abu-abu muda untuk input */
+    -fx-text-primary: #212121;
+    -fx-text-secondary: #666666;
     
-    /* VARIABEL YANG SALAH SUDAH DIGANTI NAMANYA
-      Menjadi '-fx-custom-border-color' 
-    */
-    -fx-custom-border-color: #E0E0E0;
-    
-    -fx-text-base-color: #333333;
-    -fx-font-family: "System";
+    -fx-font-family: "Segoe UI", "System", "Helvetica Neue", "Arial";
 }
 
-/* --- LATAR BELAKANG UTAMA --- */
-.border-pane {
-    -fx-background-color: -fx-base;
+/* --- Latar Belakang Utama --- */
+.root {
+    -fx-background-color: -fx-base-bg;
 }
 
-/* --- GAYA TOMBOL --- */
-.button {
-    -fx-background-color: #EAEAEA;
-    -fx-text-fill: -fx-text-base-color;
+/* * --- Gaya "Kartu" (Card) --- 
+ * Ini adalah inti dari desain baru.
+ * Ini menargetkan VBox di <center> dan <right>
+*/
+.border-pane > .center > .vbox,
+.border-pane > .right > .vbox {
+    -fx-background-color: -fx-card-bg;
+    -fx-background-radius: 8px; /* Sudut melengkung */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 10, 0, 0, 2); /* Bayangan halus */
+    -fx-padding: 20px; /* Jarak di dalam kartu */
+}
+
+/* --- Judul Form --- */
+#form-title {
+    -fx-font-size: 18px;
     -fx-font-weight: bold;
-    -fx-background-radius: 4px;
+    -fx-text-fill: -fx-text-primary;
+    -fx-padding: 0 0 5px 0; /* Garis bawah halus */
+    -fx-border-color: -fx-primary;
+    -fx-border-width: 0 0 3px 0;
+}
+
+/* --- Tombol --- */
+.button {
+    -fx-background-color: #F0F0F0;
+    -fx-text-fill: #444444;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6px; /* Sudut melengkung */
     -fx-cursor: hand;
+    -fx-pref-height: 32px; /* Tinggi tombol konsisten */
     -fx-transition: all 0.1s ease-in;
 }
 .button:hover {
-    -fx-background-color: #DCDCDC;
-}
-.button:pressed {
-    -fx-background-color: #CECECE;
+    -fx-background-color: #E0E0E0;
 }
 
-/* Tombol Aksi Utama (Simpan) */
+/* Tombol Simpan (Primary) */
 #btnSimpan {
     -fx-background-color: -fx-primary;
     -fx-text-fill: white;
@@ -49,11 +66,8 @@
 #btnSimpan:hover {
     -fx-background-color: derive(-fx-primary, -10%);
 }
-#btnSimpan:pressed {
-    -fx-background-color: derive(-fx-primary, -20%);
-}
 
-/* Tombol Aksi Bahaya (Hapus) */
+/* Tombol Hapus (Danger) */
 #btnHapus {
     -fx-background-color: -fx-danger;
     -fx-text-fill: white;
@@ -61,74 +75,52 @@
 #btnHapus:hover {
     -fx-background-color: derive(-fx-danger, -10%);
 }
-#btnHapus:pressed {
-    -fx-background-color: derive(-fx-danger, -20%);
-}
 
-/* --- GAYA FORM INPUT (TextField, ComboBox) --- */
-.text-field, .text-area, .combo-box {
-    -fx-background-color: -fx-control-inner-background;
+/* --- Input Form (Modern & Clean) --- */
+.text-field, .text-area, .combo-box .list-cell {
     -fx-font-size: 13px;
-    -fx-background-radius: 0;
-    -fx-border-radius: 0;
-    
-    /* PERBAIKAN: Menggunakan variabel baru '-fx-custom-border-color'
-    */
-    -fx-border-color: transparent transparent -fx-custom-border-color transparent;
-    -fx-border-width: 2px;
-}
-.text-area {
-    /* PERBAIKAN: Menggunakan variabel baru */
-    -fx-border-color: -fx-custom-border-color;
-    -fx-border-width: 2px;
+    -fx-text-fill: -fx-text-primary;
 }
 
-/* Efek "Fokus" saat diklik */
+.text-field, .text-area, .combo-box {
+    -fx-background-color: -fx-card-bg;
+    -fx-background-radius: 6px;
+    -fx-border-radius: 6px;
+    -fx-border-color: -fx-border-color; /* Border abu-abu muda */
+    -fx-border-width: 1px;
+}
 .text-field:focused, .text-area:focused, .combo-box:focused {
-    -fx-border-color: transparent transparent -fx-primary transparent;
-}
-.text-area:focused {
-    -fx-border-color: -fx-primary;
-}
-
-/* Panah ComboBox */
-.combo-box .arrow {
-    -fx-background-color: -fx-primary;
+    -fx-border-color: -fx-primary; /* Border biru saat dipilih */
+    -fx-border-width: 1px;
+    -fx-effect: dropshadow(gaussian, rgba(0,120,212,0.3), 5, 0, 0, 0); /* Bayangan biru halus */
 }
 
-/* --- GAYA TABEL --- */
-
-/* Latar belakang VBox (area filter dan tabel) */
-.border-pane > .center > .vbox {
-    -fx-background-color: -fx-control-inner-background;
-}
-
+/* --- Tabel --- */
 .table-view {
-    -fx-background-color: -fx-control-inner-background;
-    /* PERBAIKAN: Menggunakan variabel baru */
-    -fx-border-color: -fx-custom-border-color;
-    -fx-border-width: 2px;
+    -fx-background-color: -fx-card-bg;
+    -fx-border-color: -fx-border-color;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-border-width: 1px;
 }
 
 /* Header Tabel */
 .table-view .column-header-background {
-    -fx-background-color: #FAFAFA;
-    /* PERBAIKAN: Menggunakan variabel baru */
-    -fx-border-color: transparent transparent -fx-custom-border-color transparent;
-    -fx-border-width: 2px;
+    -fx-background-color: -fx-base-bg; /* Latar header sama dgn root */
+    -fx-background-radius: 6px 6px 0 0;
 }
 .table-view .column-header .label {
     -fx-font-weight: bold;
-    -fx-text-fill: -fx-text-base-color;
-    -fx-padding: 8px;
+    -fx-text-fill: -fx-text-secondary;
+    -fx-padding: 10px; /* Header lebih tinggi */
 }
 
 /* Baris Tabel */
 .table-row-cell {
-    -fx-padding: 4px;
+    -fx-padding: 8px;
     -fx-font-size: 13px;
+    -fx-border-color: transparent;
 }
-
 /* Baris Tabel saat dipilih */
 .table-row-cell:selected {
     -fx-background-color: -fx-primary;
@@ -140,17 +132,17 @@
 /* Pesan "Tidak ditemukan" */
 .table-view:placeholder .label {
     -fx-font-size: 14px;
-    -fx-text-fill: #888888;
+    -fx-text-fill: -fx-text-secondary;
 }
 
-/* --- GAYA STATUS BAR (JAM) --- */
+/* --- Status Bar (Jam) --- */
 .border-pane > .bottom > .hbox {
-    -fx-background-color: #FAFAFA;
-    /* PERBAIKAN: Menggunakan variabel baru */
-    -fx-border-color: -fx-custom-border-color;
-    -fx-border-width: 1px 0 0 0;
+    -fx-background-color: -fx-card-bg;
+    -fx-border-color: -fx-border-color;
+    -fx-border-width: 1px 0 0 0; /* Garis tipis di atas */
 }
 #labelJam {
-    -fx-text-fill: #555555;
-    -fx-font-weight: bold;
+    -fx-text-fill: -fx-text-secondary;
+    -fx-font-size: 11px;
+    -fx-font-weight: 600;
 }

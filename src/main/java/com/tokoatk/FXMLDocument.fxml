@@ -21,14 +21,14 @@
     stylesheets="@style.css">
    
    <right>
-      <VBox prefWidth="300.0" spacing="10.0" BorderPane.alignment="CENTER">
+      <VBox prefWidth="300.0" spacing="15.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Form Data Barang">
+            <Label text="Form Data Barang" id="form-title">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <GridPane hgap="10.0" vgap="10.0">
+            <GridPane hgap="10.0" vgap="12.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="90.0" minWidth="80.0" prefWidth="80.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" />
@@ -53,22 +53,29 @@
                   <TextArea fx:id="fieldDeskripsi" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                </children>
             </GridPane>
-            <Button fx:id="btnSimpan" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleSimpanButton" text="Simpan Data" />
-            <Button fx:id="btnHapus" layoutX="10.0" layoutY="279.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleHapusButton" text="Hapus" />
-            <Button fx:id="btnBersih" layoutX="10.0" layoutY="313.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleBersihButton" text="Bersihkan Form" />
+            
+            <Region VBox.vgrow="ALWAYS" />
+            
+            <VBox spacing="8.0">
+                <children>
+                    <Button fx:id="btnSimpan" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleSimpanButton" text="Simpan Data" />
+                    <Button fx:id="btnHapus" layoutX="10.0" layoutY="279.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleHapusButton" text="Hapus" />
+                    <Button fx:id="btnBersih" layoutX="10.0" layoutY="313.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleBersihButton" text="Bersihkan Form" />
+                </children>
+            </VBox>
          </children>
          <BorderPane.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            <Insets bottom="10.0" left="5.0" right="10.0" top="10.0" />
          </BorderPane.margin>
       </VBox>
    </right>
    
    <bottom>
-    <HBox alignment="CENTER_LEFT" prefHeight="25.0">
-        <children>
+      <HBox alignment="CENTER_LEFT" prefHeight="30.0">
+         <children>
             <Label fx:id="labelJam" text="Memuat jam...">
                <HBox.margin>
-                  <Insets left="10.0" />
+                  <Insets left="15.0" />
                </HBox.margin>
             </Label>
          </children>
@@ -81,8 +88,11 @@
             <HBox alignment="CENTER_LEFT" spacing="5.0">
                <children>
                   <Label text="Filter:" />
-                  <TextField fx:id="fieldCari" promptText="Ketik memfilter..." HBox.hgrow="ALWAYS" />
+                  <TextField fx:id="fieldCari" promptText="Ketik nama, kategori, atau stok..." HBox.hgrow="ALWAYS" />
                </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
             </HBox>
             
             <TableView fx:id="tabelBarang" VBox.vgrow="ALWAYS">
@@ -95,9 +105,9 @@
               </columns>
             </TableView>
          </children>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="5.0" top="10.0" />
+         </BorderPane.margin>
       </VBox>
    </center>
    
