@@ -1,0 +1,156 @@
+/*
+ * ====================================================
+ * == File style.css (v7.1 - PERBAIKAN StackOverflowError) ==
+ * ====================================================
+ */
+
+/* --- WARNA DASAR --- */
+.root {
+    -fx-primary: #0078D4; 
+    -fx-danger: #D9534F;
+    -fx-base: #FAFAFA;
+    -fx-control-inner-background: #FFFFFF;
+    
+    /* VARIABEL YANG SALAH SUDAH DIGANTI NAMANYA
+      Menjadi '-fx-custom-border-color' 
+    */
+    -fx-custom-border-color: #E0E0E0;
+    
+    -fx-text-base-color: #333333;
+    -fx-font-family: "System";
+}
+
+/* --- LATAR BELAKANG UTAMA --- */
+.border-pane {
+    -fx-background-color: -fx-base;
+}
+
+/* --- GAYA TOMBOL --- */
+.button {
+    -fx-background-color: #EAEAEA;
+    -fx-text-fill: -fx-text-base-color;
+    -fx-font-weight: bold;
+    -fx-background-radius: 4px;
+    -fx-cursor: hand;
+    -fx-transition: all 0.1s ease-in;
+}
+.button:hover {
+    -fx-background-color: #DCDCDC;
+}
+.button:pressed {
+    -fx-background-color: #CECECE;
+}
+
+/* Tombol Aksi Utama (Simpan) */
+#btnSimpan {
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: white;
+}
+#btnSimpan:hover {
+    -fx-background-color: derive(-fx-primary, -10%);
+}
+#btnSimpan:pressed {
+    -fx-background-color: derive(-fx-primary, -20%);
+}
+
+/* Tombol Aksi Bahaya (Hapus) */
+#btnHapus {
+    -fx-background-color: -fx-danger;
+    -fx-text-fill: white;
+}
+#btnHapus:hover {
+    -fx-background-color: derive(-fx-danger, -10%);
+}
+#btnHapus:pressed {
+    -fx-background-color: derive(-fx-danger, -20%);
+}
+
+/* --- GAYA FORM INPUT (TextField, ComboBox) --- */
+.text-field, .text-area, .combo-box {
+    -fx-background-color: -fx-control-inner-background;
+    -fx-font-size: 13px;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    
+    /* PERBAIKAN: Menggunakan variabel baru '-fx-custom-border-color'
+    */
+    -fx-border-color: transparent transparent -fx-custom-border-color transparent;
+    -fx-border-width: 2px;
+}
+.text-area {
+    /* PERBAIKAN: Menggunakan variabel baru */
+    -fx-border-color: -fx-custom-border-color;
+    -fx-border-width: 2px;
+}
+
+/* Efek "Fokus" saat diklik */
+.text-field:focused, .text-area:focused, .combo-box:focused {
+    -fx-border-color: transparent transparent -fx-primary transparent;
+}
+.text-area:focused {
+    -fx-border-color: -fx-primary;
+}
+
+/* Panah ComboBox */
+.combo-box .arrow {
+    -fx-background-color: -fx-primary;
+}
+
+/* --- GAYA TABEL --- */
+
+/* Latar belakang VBox (area filter dan tabel) */
+.border-pane > .center > .vbox {
+    -fx-background-color: -fx-control-inner-background;
+}
+
+.table-view {
+    -fx-background-color: -fx-control-inner-background;
+    /* PERBAIKAN: Menggunakan variabel baru */
+    -fx-border-color: -fx-custom-border-color;
+    -fx-border-width: 2px;
+}
+
+/* Header Tabel */
+.table-view .column-header-background {
+    -fx-background-color: #FAFAFA;
+    /* PERBAIKAN: Menggunakan variabel baru */
+    -fx-border-color: transparent transparent -fx-custom-border-color transparent;
+    -fx-border-width: 2px;
+}
+.table-view .column-header .label {
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-text-base-color;
+    -fx-padding: 8px;
+}
+
+/* Baris Tabel */
+.table-row-cell {
+    -fx-padding: 4px;
+    -fx-font-size: 13px;
+}
+
+/* Baris Tabel saat dipilih */
+.table-row-cell:selected {
+    -fx-background-color: -fx-primary;
+}
+.table-row-cell:selected .text {
+     -fx-fill: white;
+}
+
+/* Pesan "Tidak ditemukan" */
+.table-view:placeholder .label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #888888;
+}
+
+/* --- GAYA STATUS BAR (JAM) --- */
+.border-pane > .bottom > .hbox {
+    -fx-background-color: #FAFAFA;
+    /* PERBAIKAN: Menggunakan variabel baru */
+    -fx-border-color: -fx-custom-border-color;
+    -fx-border-width: 1px 0 0 0;
+}
+#labelJam {
+    -fx-text-fill: #555555;
+    -fx-font-weight: bold;
+}
