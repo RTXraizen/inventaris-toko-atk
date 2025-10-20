@@ -1,6 +1,6 @@
 package com.tokoatk;
 
-import javafx.scene.image.Image; // <-- TAMBAHKAN IMPORT INI
+import javafx.scene.image.Image; // Import ini masih dipakai
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,31 +8,37 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException; 
 
+/**
+ * Kelas utama yang menjalankan seluruh aplikasi.
+ * File ini sekarang dimodifikasi untuk memuat Login.fxml terlebih dahulu.
+ */
 public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLDocument.fxml"));
+            // === INI BAGIAN YANG DIUBAH ===
+            // 1. Muat file Login.fxml, bukan FXMLDocument.fxml
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
             Parent root = loader.load();
 
             Scene scene = new Scene(root);
             
-            primaryStage.setTitle("Sistem Inventaris Toko ATK");
+            // 2. Beri judul untuk jendela login
+            primaryStage.setTitle("Login - Sistem Inventaris Toko ATK");
             primaryStage.setScene(scene);
             
-            // --- KODE ICON ANDA DIMULAI DI SINI ---
+            // 3. (Opsional) Beri icon untuk jendela login
             try {
-                // Pastikan 'icon.png' ada di package com.tokoatk
+                // Pastikan 'iconzoro.jpeg' ada di package com.tokoatk
                 Image icon = new Image(getClass().getResourceAsStream("iconzoro.jpeg"));
                 primaryStage.getIcons().add(icon);
             } catch (Exception e) {
-                // Ini akan muncul di log jika icon.png tidak ditemukan
                 System.err.println("Gagal memuat icon: " + e.getMessage());
             }
-            // --- BATAS AKHIR KODE ICON ---
             
-            primaryStage.setMaximized(true); 
+            // 4. Jangan di-maximize, biarkan ukuran login window apa adanya
+            // primaryStage.setMaximized(true); // <-- Baris ini dinonaktifkan
             
             primaryStage.show();
             
