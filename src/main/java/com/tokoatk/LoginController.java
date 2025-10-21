@@ -3,7 +3,7 @@ package com.tokoatk;
 import com.tokoatk.dao.PenggunaDAO;
 import com.tokoatk.model.Pengguna;
 import java.io.IOException;
-import javafx.concurrent.Task; // <-- IMPORT BARU
+import javafx.concurrent.Task; 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,12 +15,15 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
+import javafx.fxml.Initializable; 
+import java.net.URL; 
+import java.util.ResourceBundle; 
+import javafx.scene.input.KeyCode; 
 
 /**
  * Controller (Otak) untuk file Login.fxml.
- * VERSI FINAL 2.0: Transisi mulus antar jendela.
  */
-public class LoginController {
+public class LoginController implements Initializable { 
 
     @FXML
     private TextField fieldUsername;
@@ -32,6 +35,28 @@ public class LoginController {
     private Label labelError;
 
     private final PenggunaDAO penggunaDAO = new PenggunaDAO();
+    
+    /**
+     * == SETUP: Mengaktifkan Tombol Enter ==
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // Saat fokus berada pada PasswordField dan tombol ditekan:
+        fieldPassword.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                handleLoginButton(new ActionEvent());
+                event.consume(); 
+            }
+        });
+        
+        // Pindahkan fokus ke password jika Enter di Username field
+        fieldUsername.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                fieldPassword.requestFocus(); 
+                event.consume();
+            }
+        });
+    }
 
     /**
      * Metode ini akan dipanggil saat tombol "Login" di FXML diklik.
@@ -49,7 +74,6 @@ public class LoginController {
         Task<Pengguna> loginTask = new Task<Pengguna>() {
             @Override
             protected Pengguna call() throws Exception {
-                // Ini berjalan di background thread
                 return penggunaDAO.cekLogin(username, password);
             }
         };
@@ -58,20 +82,12 @@ public class LoginController {
             Pengguna pengguna = loginTask.getValue(); 
             
             if (pengguna != null) {
-                // Login BERHASIL
                 System.out.println("Login sukses! Selamat datang, " + pengguna.getNamaLengkap());
                 
-                // === INI PERBAIKANNYA ===
-                // 1. Ambil stage (jendela) login saat ini
                 Stage loginStage = (Stage) btnLogin.getScene().getWindow();
-                
-                // 2. Buka jendela inventaris BARU, dan kirim jendela login
-                //    agar bisa ditutup dari sana.
                 bukaJendelaInventaris(pengguna, loginStage);
-                // Kita tidak lagi memanggil tutupJendelaLogin() dari sini.
                 
             } else {
-                // Login GAGAL
                 tampilkanError("Username atau password salah.");
                 kembalikanTombol();
             }
@@ -83,7 +99,7 @@ public class LoginController {
             loginTask.getException().printStackTrace(); 
         });
 
-        // Ubah UI (Sekarang juga!)
+        // Ubah UI
         labelError.setVisible(false);
         btnLogin.setDisable(true);
         btnLogin.setText("Mencoba login...");
@@ -101,19 +117,14 @@ public class LoginController {
         btnLogin.setText("Login");
     }
 
-    // HAPUS method tutupJendelaLogin() yang lama, kita tidak membutuhkannya lagi.
-
     /**
      * Helper method untuk membuka jendela inventaris (FXMLDocument.fxml).
-     * PERUBAHAN: Sekarang menerima 'stageToClose' (jendela login)
      */
     private void bukaJendelaInventaris(Pengguna pengguna, Stage stageToClose) {
         try {
-            // 1. Muat FXML (proses ini butuh waktu)
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLDocument.fxml"));
             Parent root = loader.load();
 
-            // 2. Siapkan stage (jendela) BARU
             Stage inventarisStage = new Stage();
             inventarisStage.setTitle("Sistem Inventaris Toko ATK - Login sebagai: " + pengguna.getNamaLengkap());
             inventarisStage.setScene(new Scene(root));
@@ -126,16 +137,12 @@ public class LoginController {
                 System.err.println("Gagal memuat icon jendela utama: " + e.getMessage());
             }
             
-            // 3. Tampilkan jendela inventaris BARU
             inventarisStage.show();
-            
-            // 4. SETELAH jendela baru muncul, TUTUP jendela login LAMA
             stageToClose.close(); 
             
         } catch (IOException e) {
             System.err.println("Gagal memuat FXMLDocument.fxml: " + e.getMessage());
             e.printStackTrace();
-            // Jika gagal, kembalikan tombol login agar pengguna bisa coba lagi
             tampilkanError("Gagal memuat halaman utama.");
             kembalikanTombol();
         }
